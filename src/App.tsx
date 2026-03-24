@@ -3,9 +3,49 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Component, ReactNode } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import Brain3D from './components/Brain3D';
+
+// --- Error Boundary ---
+class ErrorBoundary extends Component<{ children: ReactNode }, { hasError: boolean, error: Error | null }> {
+  constructor(props: { children: ReactNode }) {
+    super(props);
+    this.state = { hasError: false, error: null };
+  }
+
+  static getDerivedStateFromError(error: Error) {
+    return { hasError: true, error };
+  }
+
+  componentDidCatch(error: Error, errorInfo: any) {
+    console.error("ErrorBoundary caught an error:", error, errorInfo);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div className="min-h-screen bg-cream flex flex-col items-center justify-center p-6 text-center">
+          <h1 className="text-4xl font-bold text-dopamine-orange mb-4 font-sans">อุ๊ปส์! เกิดข้อผิดพลาดบางอย่าง</h1>
+          <p className="text-lg text-ink/70 mb-8 max-w-md font-sans">
+            แอปพลิเคชันพบข้อผิดพลาดที่ไม่คาดคิด โปรดลองรีเฟรชหน้าเว็บอีกครั้ง
+          </p>
+          <div className="bg-white p-4 rounded-lg border border-ink/10 text-left overflow-auto max-w-2xl w-full">
+            <code className="text-xs text-red-600">{this.state.error?.toString()}</code>
+          </div>
+          <button 
+            onClick={() => window.location.reload()}
+            className="mt-8 bg-dopamine-yellow text-white px-8 py-3 rounded-full font-bold shadow-lg font-sans"
+          >
+            รีเฟรชหน้าเว็บ
+          </button>
+        </div>
+      );
+    }
+
+    return this.props.children;
+  }
+}
 import { 
   Brain, 
   Play, 
@@ -163,7 +203,7 @@ const VideoSection = () => {
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="font-sans font-bold text-5xl md:text-7xl mb-4 tracking-tight text-white drop-shadow-sm">THE DOPAMINE MELODY</h2>
-          <p className="text-lg uppercase tracking-[0.3em] font-medium text-ink/60">Watch the Dopamine Melody Explainer</p>
+          <p className="text-lg uppercase tracking-[0.3em] font-medium text-ink/60">รับชมวิดีโออธิบายเรื่อง Dopamine Melody</p>
         </div>
 
         <motion.div 
@@ -185,7 +225,7 @@ const VideoSection = () => {
           {/* Overlay text if needed */}
           <div className="absolute inset-0 pointer-events-none flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
             <div className="bg-white/10 backdrop-blur-md px-8 py-4 rounded-full border border-white/20">
-              <p className="text-white font-medium tracking-widest">DOPAMINE MELODY EXPLAINER</p>
+              <p className="text-white font-medium tracking-widest">วิดีโออธิบายเรื่อง DOPAMINE MELODY</p>
             </div>
           </div>
         </motion.div>
@@ -226,7 +266,7 @@ const PostModal = ({ post, onClose }: { post: any, onClose: () => void }) => {
               referrerPolicy="no-referrer"
             />
             <div className="absolute top-6 left-6 bg-dopamine-yellow px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest text-ink">
-              Knowledge
+              สาระน่ารู้
             </div>
           </div>
           
@@ -262,7 +302,7 @@ const PostModal = ({ post, onClose }: { post: any, onClose: () => void }) => {
                 </div>
                 <div>
                   <div className="text-sm font-bold">{post.author}</div>
-                  <div className="text-[10px] uppercase tracking-widest opacity-50">Content Creator</div>
+                  <div className="text-[10px] uppercase tracking-widest opacity-50">ผู้สร้างคอนเทนต์</div>
                 </div>
               </div>
               
@@ -270,7 +310,7 @@ const PostModal = ({ post, onClose }: { post: any, onClose: () => void }) => {
                 onClick={onClose}
                 className="text-sm font-bold uppercase tracking-widest border-b-2 border-dopamine-orange hover:text-dopamine-orange transition-colors"
               >
-                Close Article
+                ปิดบทความ
               </button>
             </div>
           </div>
@@ -288,7 +328,7 @@ const UpdateSection = () => {
       title: "สมองกับการฟังเพลง",
       excerpt: "การฟังเพลงที่คุณชอบช่วยกระตุ้นการหลั่งโดปามีนในสมองส่วนที่เกี่ยวข้องกับความพึงพอใจ",
       author: "Admin",
-      date: "Mar 20, 2026",
+      date: "20 มี.ค. 2026",
       image: "https://picsum.photos/seed/brain-music/800/600"
     },
     {
@@ -296,7 +336,7 @@ const UpdateSection = () => {
       title: "โดปามีนและจังหวะดนตรี",
       excerpt: "วิทยาศาสตร์เบื้องหลังว่าทำไมจังหวะดนตรีถึงช่วยเพิ่มสมาธิและอารมณ์ผ่านการเปลี่ยนแปลงทางเคมีในสมอง",
       author: "Admin",
-      date: "Mar 18, 2026",
+      date: "18 มี.ค. 2026",
       image: "https://picsum.photos/seed/rhythm/800/600"
     },
     {
@@ -304,7 +344,7 @@ const UpdateSection = () => {
       title: "เสียงเพลงและระบบรางวัล",
       excerpt: "สำรวจว่าแนวเพลงที่แตกต่างกันส่งผลต่อระดับโดปามีนและความเป็นอยู่ที่ดีทางอารมณ์อย่างไร",
       author: "Admin",
-      date: "Mar 15, 2026",
+      date: "15 มี.ค. 2026",
       image: "https://picsum.photos/seed/neuroscience/800/600"
     }
   ];
@@ -318,7 +358,7 @@ const UpdateSection = () => {
             <p className="text-lg opacity-60 uppercase tracking-widest">แบ่งปันความรู้และข้อมูลใหม่ๆ</p>
           </div>
           <div className="flex items-center gap-2 text-dopamine-orange font-bold uppercase tracking-widest text-sm">
-            All Posts <ChevronRight size={16} />
+            บทความทั้งหมด <ChevronRight size={16} />
           </div>
         </div>
 
@@ -337,7 +377,7 @@ const UpdateSection = () => {
                   referrerPolicy="no-referrer"
                 />
                 <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest">
-                  Knowledge
+                  สาระน่ารู้
                 </div>
               </div>
               <div className="flex items-center gap-4 text-xs font-bold uppercase tracking-widest opacity-40 mb-3">
@@ -350,7 +390,7 @@ const UpdateSection = () => {
                 onClick={() => setSelectedPost(post)}
                 className="flex items-center gap-2 text-sm font-bold uppercase tracking-widest group-hover:gap-4 transition-all"
               >
-                Read More <ChevronRight size={14} />
+                อ่านเพิ่มเติม <ChevronRight size={14} />
               </div>
             </motion.article>
           ))}
@@ -417,7 +457,7 @@ const AboutSection = () => {
           </div>
           {/* Floating elements */}
           <div className="absolute -top-10 -right-10 w-32 h-32 bg-dopamine-orange rounded-full flex items-center justify-center text-white font-bold text-center p-4 shadow-xl -rotate-12">
-            STAY TUNED!
+            โปรดติดตาม!
           </div>
         </motion.div>
       </div>
@@ -503,6 +543,9 @@ const ContactFooter = () => {
 // --- Main App ---
 
 export default function App() {
+  useEffect(() => {
+    console.log("กำลังเริ่มต้นแอป Dopamine Studio...");
+  }, []);
 
   // Smooth scroll implementation
   useEffect(() => {
@@ -522,25 +565,27 @@ export default function App() {
   }, []);
 
   return (
-    <div className="selection:bg-dopamine-yellow selection:text-ink">
-      <Navbar />
-      
-      <main>
-        <Hero onWatchClick={() => {
-          const element = document.getElementById('video');
-          if (element) {
-            element.scrollIntoView({ behavior: 'smooth' });
-          }
-        }} />
+    <ErrorBoundary>
+      <div className="selection:bg-dopamine-yellow selection:text-ink">
+        <Navbar />
         
-        <VideoSection />
-        
-        <UpdateSection />
-        
-        <AboutSection />
-      </main>
+        <main>
+          <Hero onWatchClick={() => {
+            const element = document.getElementById('video');
+            if (element) {
+              element.scrollIntoView({ behavior: 'smooth' });
+            }
+          }} />
+          
+          <VideoSection />
+          
+          <UpdateSection />
+          
+          <AboutSection />
+        </main>
 
-      <ContactFooter />
-    </div>
+        <ContactFooter />
+      </div>
+    </ErrorBoundary>
   );
 }
