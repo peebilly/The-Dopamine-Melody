@@ -77,7 +77,7 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <Brain className="w-8 h-8 text-dopamine-yellow" />
-          <span className="title-serif text-xl tracking-tighter">DOPAMINE STUDIO</span>
+          <span className="title-prompt text-xl tracking-tighter">DOPAMINE STUDIO</span>
         </div>
 
         {/* Desktop Nav */}
@@ -430,11 +430,11 @@ const AboutSection = () => {
           
           <div className="mt-12 grid grid-cols-2 gap-8">
             <div className="border-l-4 border-dopamine-yellow pl-6">
-              <div className="text-4xl title-serif mb-1">98%</div>
+              <div className="text-4xl title-prompt mb-1">98%</div>
               <div className="text-sm uppercase tracking-widest font-bold opacity-50">อัตราการมีส่วนร่วม</div>
             </div>
             <div className="border-l-4 border-dopamine-orange pl-6">
-              <div className="text-4xl title-serif mb-1">15k+</div>
+              <div className="text-4xl title-prompt mb-1">15k+</div>
               <div className="text-sm uppercase tracking-widest font-bold opacity-50">ผู้เรียนที่เข้าถึง</div>
             </div>
           </div>
@@ -524,11 +524,11 @@ const ContactFooter = () => {
         <div className="border-t border-white/10 pt-12 flex flex-col md:flex-row items-center justify-between gap-8">
           <div className="flex items-center gap-2">
             <Brain className="w-6 h-6 text-dopamine-yellow" />
-            <span className="title-serif text-lg tracking-tighter">DOPAMINE STUDIO</span>
+            <span className="title-prompt text-lg tracking-tighter">DOPAMINE STUDIO</span>
           </div>
           
           <div className="text-center">
-            <p className="title-serif text-2xl md:text-4xl italic opacity-80">ขอบคุณที่รับชม</p>
+            <p className="title-prompt text-2xl md:text-4xl italic opacity-80">ขอบคุณที่รับชม</p>
           </div>
 
           <div className="text-xs uppercase tracking-[0.2em] opacity-30">

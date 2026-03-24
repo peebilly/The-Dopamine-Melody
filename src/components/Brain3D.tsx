@@ -1,33 +1,35 @@
-import React, { useRef, Suspense } from 'react';
+import React, { useRef } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { OrbitControls, Float, PerspectiveCamera, useGLTF, Center } from '@react-three/drei';
+import { OrbitControls, Float, PerspectiveCamera, Center, MeshDistortMaterial, Sphere } from '@react-three/drei';
 import * as THREE from 'three';
 
-const BrainModel = () => {
-  // Load the GLB model from the public/models directory
-  const { scene } = useGLTF('/models/brain.glb');
-  const meshRef = useRef<THREE.Group>(null);
+const GlowingSphere = () => {
+  const meshRef = useRef<THREE.Mesh>(null);
 
   useFrame((state) => {
     if (meshRef.current) {
-      // Add some gentle rotation
-      meshRef.current.rotation.y = state.clock.getElapsedTime() * 0.2;
-      meshRef.current.rotation.z = Math.sin(state.clock.getElapsedTime() * 0.5) * 0.05;
+      // Add some gentle rotation and pulsing
+      meshRef.current.rotation.y = state.clock.getElapsedTime() * 0.5;
+      const scale = 1 + Math.sin(state.clock.getElapsedTime() * 2) * 0.05;
+      meshRef.current.scale.set(scale, scale, scale);
     }
   });
 
   return (
-    <primitive 
-      ref={meshRef} 
-      object={scene} 
-      scale={0.6} 
-      rotation={[0, 0, 0]} // Reset rotation
-    />
+    <Sphere args={[1.5, 64, 64]} ref={meshRef}>
+      <MeshDistortMaterial
+        color="#EAB308"
+        speed={2}
+        distort={0.4}
+        radius={1}
+        emissive="#F97316"
+        emissiveIntensity={0.5}
+        roughness={0.2}
+        metalness={0.8}
+      />
+    </Sphere>
   );
 };
-
-// Preload the model
-useGLTF.preload('/models/brain.glb');
 
 const Brain3D = () => {
   return (
@@ -39,23 +41,21 @@ const Brain3D = () => {
             gl.shadowMap.type = THREE.PCFShadowMap;
           }}
         >
-        <PerspectiveCamera makeDefault position={[0, 0, 8]} fov={50} />
-        <ambientLight intensity={0.8} />
-        <pointLight position={[10, 10, 10]} intensity={1.5} />
-        <spotLight position={[-10, 10, 10]} angle={0.15} penumbra={1} intensity={1.5} castShadow />
+        <PerspectiveCamera makeDefault position={[0, 0, 6]} fov={50} />
+        <ambientLight intensity={0.5} />
+        <pointLight position={[10, 10, 10]} intensity={2} color="#EAB308" />
+        <spotLight position={[-10, 10, 10]} angle={0.15} penumbra={1} intensity={2} castShadow />
         
-        <Suspense fallback={<mesh><sphereGeometry args={[0.5, 32, 32]} /><meshStandardMaterial color="#EAB308" wireframe /></mesh>}>
-          <Float speed={1.5} rotationIntensity={0.5} floatIntensity={1}>
-            <Center>
-              <BrainModel />
-            </Center>
-          </Float>
-        </Suspense>
+        <Float speed={2} rotationIntensity={1} floatIntensity={1.5}>
+          <Center>
+            <GlowingSphere />
+          </Center>
+        </Float>
 
         <OrbitControls 
           enableZoom={false} 
           autoRotate 
-          autoRotateSpeed={0.5}
+          autoRotateSpeed={1}
           minPolarAngle={Math.PI / 4}
           maxPolarAngle={Math.PI / 1.5}
         />
