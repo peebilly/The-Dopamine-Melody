@@ -409,8 +409,8 @@ const AboutSection = () => {
           <div className="aspect-square rounded-full bg-dopamine-yellow/10 absolute -inset-10 animate-pulse" />
           <div className="relative z-10 rounded-3xl overflow-hidden shadow-2xl rotate-3">
             <img 
-              src="/Brainn.jpg" 
-              alt="Brainn" 
+              src="/Brain.jpg" 
+              alt="Brain" 
               className="w-full h-full object-cover"
               referrerPolicy="no-referrer"
             />

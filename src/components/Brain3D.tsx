@@ -32,7 +32,13 @@ useGLTF.preload('/models/brain.glb');
 const Brain3D = () => {
   return (
     <div className="w-full h-[250px] md:h-[350px] lg:h-[450px] cursor-grab active:cursor-grabbing">
-      <Canvas shadows dpr={[1, 2]}>
+        <Canvas 
+          shadows 
+          dpr={[1, 2]}
+          onCreated={({ gl }) => {
+            gl.shadowMap.type = THREE.PCFShadowMap;
+          }}
+        >
         <PerspectiveCamera makeDefault position={[0, 0, 8]} fov={50} />
         <ambientLight intensity={0.8} />
         <pointLight position={[10, 10, 10]} intensity={1.5} />
