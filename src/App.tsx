@@ -135,105 +135,149 @@ const Hero = ({ onWatchClick }: { onWatchClick: () => void }) => {
       <motion.div 
         animate={{ y: [0, -20, 0], rotate: [-12, -8, -12] }}
         transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-40 right-[15%] text-dopamine-yellow/40 text-9xl font-bold select-none pointer-events-none hidden md:block"
+        className="absolute top-40 right-[15%] text-dopamine-yellow/60 text-9xl font-bold select-none pointer-events-none hidden md:block"
       >
         ?
       </motion.div>
       <motion.div 
         animate={{ y: [0, 20, 0], rotate: [12, 15, 12] }}
         transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute bottom-40 left-[10%] text-dopamine-yellow/40 text-8xl font-bold select-none pointer-events-none hidden md:block"
+        className="absolute bottom-40 left-[10%] text-dopamine-yellow/60 text-8xl font-bold select-none pointer-events-none hidden md:block"
       >
         ?
       </motion.div>
       <motion.div 
         animate={{ x: [0, 15, 0], y: [0, -10, 0] }}
         transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-1/4 left-[20%] text-dopamine-yellow/30 text-7xl select-none pointer-events-none"
+        className="absolute top-1/4 left-[20%] text-dopamine-yellow/50 text-7xl select-none pointer-events-none"
       >
         ♪
       </motion.div>
       <motion.div 
         animate={{ x: [0, -15, 0], y: [0, 10, 0] }}
         transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute bottom-1/3 right-[10%] text-dopamine-yellow/40 text-8xl select-none pointer-events-none"
+        className="absolute bottom-1/3 right-[10%] text-dopamine-yellow/60 text-8xl select-none pointer-events-none"
       >
         ♫
       </motion.div>
       <motion.div 
-        animate={{ scale: [1, 1.1, 1], opacity: [0.3, 0.5, 0.3] }}
+        animate={{ scale: [1, 1.1, 1], opacity: [0.5, 0.7, 0.5] }}
         transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-1/2 right-[5%] text-dopamine-yellow/35 text-6xl select-none pointer-events-none hidden lg:block"
+        className="absolute top-1/2 right-[5%] text-dopamine-yellow/55 text-6xl select-none pointer-events-none hidden lg:block"
       >
         ♬
       </motion.div>
       <motion.div 
         animate={{ y: [0, -15, 0], x: [0, 10, 0] }}
         transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute bottom-[15%] left-[25%] text-dopamine-yellow/35 text-7xl select-none pointer-events-none hidden md:block"
+        className="absolute bottom-[15%] left-[25%] text-dopamine-yellow/55 text-7xl select-none pointer-events-none hidden md:block"
       >
         ♪
       </motion.div>
       <motion.div 
         animate={{ rotate: [0, 15, 0], scale: [1, 1.2, 1] }}
         transition={{ duration: 6.5, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-[15%] left-[40%] text-dopamine-yellow/25 text-6xl select-none pointer-events-none hidden lg:block"
+        className="absolute top-[15%] left-[40%] text-dopamine-yellow/45 text-6xl select-none pointer-events-none hidden lg:block"
       >
         ♫
       </motion.div>
       <motion.div 
         animate={{ y: [0, 25, 0], rotate: [0, -10, 0] }}
         transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-[50%] left-[12%] text-dopamine-yellow/35 text-8xl font-bold select-none pointer-events-none hidden md:block"
+        className="absolute top-[50%] left-[12%] text-dopamine-yellow/55 text-8xl font-bold select-none pointer-events-none hidden md:block"
       >
         ?
       </motion.div>
       <motion.div 
-        animate={{ x: [0, -20, 0], opacity: [0.2, 0.4, 0.2] }}
+        animate={{ x: [0, -20, 0], opacity: [0.4, 0.6, 0.4] }}
         transition={{ duration: 7.5, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute bottom-[45%] right-[35%] text-dopamine-yellow/35 text-7xl select-none pointer-events-none hidden lg:block"
+        className="absolute bottom-[45%] right-[35%] text-dopamine-yellow/55 text-7xl select-none pointer-events-none hidden lg:block"
       >
         ♬
       </motion.div>
       <motion.div 
         animate={{ y: [0, -30, 0], rotate: [0, 20, 0] }}
         transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-[10%] right-[45%] text-dopamine-yellow/40 text-5xl select-none pointer-events-none hidden md:block"
+        className="absolute top-[10%] right-[45%] text-dopamine-yellow/60 text-5xl select-none pointer-events-none hidden md:block"
       >
         ♪
       </motion.div>
       <motion.div 
         animate={{ scale: [1, 1.3, 1], rotate: [0, -15, 0] }}
         transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute bottom-[10%] right-[25%] text-dopamine-yellow/40 text-9xl font-bold select-none pointer-events-none hidden lg:block"
+        className="absolute bottom-[10%] right-[25%] text-dopamine-yellow/60 text-9xl font-bold select-none pointer-events-none hidden lg:block"
       >
         ?
       </motion.div>
       <motion.div 
         animate={{ x: [0, 20, 0], y: [0, 15, 0] }}
         transition={{ duration: 8.5, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-[65%] left-[35%] text-dopamine-yellow/30 text-8xl select-none pointer-events-none hidden md:block"
+        className="absolute top-[65%] left-[35%] text-dopamine-yellow/50 text-8xl select-none pointer-events-none hidden md:block"
       >
         ♫
       </motion.div>
       <motion.div 
         animate={{ rotate: [0, 360, 0] }}
         transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-        className="absolute bottom-[30%] left-[45%] text-dopamine-yellow/35 text-6xl select-none pointer-events-none"
+        className="absolute bottom-[30%] left-[45%] text-dopamine-yellow/55 text-6xl select-none pointer-events-none"
       >
         ♬
       </motion.div>
       <motion.div 
-        animate={{ y: [0, -40, 0], opacity: [0.3, 0.6, 0.3] }}
+        animate={{ y: [0, -40, 0], opacity: [0.5, 0.8, 0.5] }}
         transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-[35%] right-[20%] text-dopamine-yellow/40 text-7xl select-none pointer-events-none hidden md:block"
+        className="absolute top-[35%] right-[20%] text-dopamine-yellow/60 text-7xl select-none pointer-events-none hidden md:block"
       >
         ♪
       </motion.div>
       <motion.div 
         animate={{ scale: [0.8, 1.1, 0.8], rotate: [0, 10, 0] }}
         transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute bottom-[55%] left-[5%] text-dopamine-yellow/25 text-8xl font-bold select-none pointer-events-none hidden lg:block"
+        className="absolute bottom-[55%] left-[5%] text-dopamine-yellow/45 text-8xl font-bold select-none pointer-events-none hidden lg:block"
+      >
+        ?
+      </motion.div>
+
+      {/* New Additional Icons */}
+      <motion.div 
+        animate={{ y: [0, 30, 0], x: [0, -20, 0] }}
+        transition={{ duration: 11, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute top-[5%] left-[15%] text-dopamine-yellow/50 text-4xl select-none pointer-events-none"
+      >
+        ♪
+      </motion.div>
+      <motion.div 
+        animate={{ rotate: [0, -360] }}
+        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+        className="absolute top-[80%] right-[15%] text-dopamine-yellow/40 text-5xl select-none pointer-events-none"
+      >
+        ♫
+      </motion.div>
+      <motion.div 
+        animate={{ scale: [1, 1.5, 1], y: [0, -50, 0] }}
+        transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute bottom-[5%] left-[50%] text-dopamine-yellow/30 text-3xl select-none pointer-events-none"
+      >
+        ♬
+      </motion.div>
+      <motion.div 
+        animate={{ x: [0, 40, 0], rotate: [0, 45, 0] }}
+        transition={{ duration: 13, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute top-[45%] left-[45%] text-dopamine-yellow/20 text-9xl font-bold select-none pointer-events-none opacity-20"
+      >
+        ?
+      </motion.div>
+      <motion.div 
+        animate={{ y: [0, -20, 0], scale: [1, 1.2, 1] }}
+        transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute top-[70%] right-[40%] text-dopamine-yellow/45 text-6xl select-none pointer-events-none"
+      >
+        ♪
+      </motion.div>
+      <motion.div 
+        animate={{ rotate: [0, 20, 0], x: [0, 15, 0] }}
+        transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute top-[25%] right-[5%] text-dopamine-yellow/50 text-8xl font-bold select-none pointer-events-none"
       >
         ?
       </motion.div>
@@ -635,18 +679,13 @@ const AboutSection = () => {
           viewport={{ once: true }}
           className="relative"
         >
-          <div className="aspect-square rounded-full bg-dopamine-yellow/10 absolute -inset-10 animate-pulse" />
-          <div className="relative z-10 rounded-3xl overflow-hidden shadow-2xl rotate-3">
+          <div className="relative z-10 rounded-3xl overflow-hidden shadow-2xl rotate-3 border-8 border-white">
             <img 
-              src="/Brain.jpg" 
-              alt="Brain" 
-              className="w-full h-full object-cover"
+              src="https://images.unsplash.com/photo-1559757175-5700dde675bc?auto=format&fit=crop&q=80&w=1000" 
+              alt="Brain Visualization" 
+              className="w-full h-full object-cover hover:scale-110 transition-transform duration-700"
               referrerPolicy="no-referrer"
             />
-          </div>
-          {/* Floating elements */}
-          <div className="absolute -top-10 -right-10 w-32 h-32 bg-dopamine-orange rounded-full flex items-center justify-center text-white font-bold text-center p-4 shadow-xl -rotate-12">
-            โปรดติดตาม!
           </div>
         </motion.div>
       </div>
