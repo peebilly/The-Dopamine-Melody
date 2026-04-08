@@ -373,12 +373,6 @@ const VideoSection = () => {
             allowFullScreen
           ></iframe>
           
-          {/* Overlay text if needed */}
-          <div className="absolute inset-0 pointer-events-none flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-            <div className="bg-white/10 backdrop-blur-md px-8 py-4 rounded-lg border border-white/20">
-              <p className="text-white font-medium tracking-widest">วิดีโออธิบายเรื่อง DOPAMINE MELODY</p>
-            </div>
-          </div>
         </motion.div>
       </div>
     </section>
