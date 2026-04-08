@@ -6,6 +6,7 @@
 import { useState, useEffect, Component, ReactNode } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import Brain3D from './components/Brain3D';
+import { useLanguage } from './context/LanguageContext';
 
 // --- Error Boundary ---
 class ErrorBoundary extends Component<{ children: ReactNode }, { hasError: boolean, error: Error | null }> {
@@ -63,13 +64,14 @@ import {
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { language, setLanguage, t } = useLanguage();
 
   const navItems = [
-    { name: 'หน้าแรก', href: '#home' },
-    { name: 'วิดีโอ', href: '#video' },
-    { name: 'สาระน่ารู้', href: '#update' },
-    { name: 'เกี่ยวกับเรา', href: '#about' },
-    { name: 'ติดต่อเรา', href: '#contact' },
+    { name: t.nav.home, href: '#home' },
+    { name: t.nav.video, href: '#video' },
+    { name: t.nav.update, href: '#update' },
+    { name: t.nav.about, href: '#about' },
+    { name: t.nav.contact, href: '#contact' },
   ];
 
   return (
@@ -91,15 +93,31 @@ const Navbar = () => {
               {item.name}
             </a>
           ))}
+          
+          {/* Language Switcher */}
+          <button 
+            onClick={() => setLanguage(language === 'th' ? 'en' : 'th')}
+            className="ml-4 px-3 py-1 border-2 border-ink/10 rounded-md text-xs font-bold hover:bg-ink hover:text-white transition-all"
+          >
+            {language === 'th' ? 'EN' : 'TH'}
+          </button>
         </div>
 
         {/* Mobile Toggle */}
-        <button 
-          className="md:hidden p-2"
-          onClick={() => setIsOpen(!isOpen)}
-        >
-          {isOpen ? <X /> : <Menu />}
-        </button>
+        <div className="flex items-center gap-2 md:hidden">
+          <button 
+            onClick={() => setLanguage(language === 'th' ? 'en' : 'th')}
+            className="px-3 py-1 border-2 border-ink/10 rounded-md text-xs font-bold"
+          >
+            {language === 'th' ? 'EN' : 'TH'}
+          </button>
+          <button 
+            className="p-2"
+            onClick={() => setIsOpen(!isOpen)}
+          >
+            {isOpen ? <X /> : <Menu />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Menu */}
@@ -129,6 +147,7 @@ const Navbar = () => {
 };
 
 const Hero = ({ onWatchClick }: { onWatchClick: () => void }) => {
+  const { t } = useLanguage();
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden px-6">
       {/* Background Decorative Icons */}
@@ -318,11 +337,11 @@ const Hero = ({ onWatchClick }: { onWatchClick: () => void }) => {
           viewport={{ once: true }}
           className="text-center md:text-left"
         >
-          <h1 className="font-sans font-bold text-5xl md:text-7xl lg:text-8xl leading-none mb-4 text-dopamine-yellow tracking-tighter">
-            THE<br />DOPAMINE<br />MELODY
+          <h1 className="font-sans font-bold text-5xl md:text-7xl lg:text-8xl leading-none mb-4 text-dopamine-yellow tracking-tighter whitespace-pre-line">
+            {t.hero.title}
           </h1>
           <p className="text-lg md:text-xl uppercase tracking-[0.3em] font-medium mb-12 opacity-70">
-            โมชั่นกราฟิกอธิบายความรู้
+            {t.hero.subtitle}
           </p>
 
           <div className="flex justify-center md:justify-start">
@@ -333,7 +352,7 @@ const Hero = ({ onWatchClick }: { onWatchClick: () => void }) => {
                 className="bg-dopamine-orange text-white px-10 py-4 rounded-lg font-bold text-lg shadow-xl shadow-dopamine-orange/20 flex items-center gap-3 group transition-all hover:bg-dopamine-yellow"
               >
               <Play className="fill-current" />
-              รับชมวิดีโอ!
+              {t.hero.watchBtn}
             </motion.button>
           </div>
         </motion.div>
@@ -343,6 +362,7 @@ const Hero = ({ onWatchClick }: { onWatchClick: () => void }) => {
 };
 
 const VideoSection = () => {
+  const { t } = useLanguage();
   return (
     <section id="video" className="py-24 px-6 bg-dopamine-yellow scroll-mt-20 overflow-hidden relative">
       {/* Decorative elements */}
@@ -353,8 +373,8 @@ const VideoSection = () => {
 
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="font-sans font-bold text-5xl md:text-7xl mb-4 tracking-tight text-white drop-shadow-sm">THE DOPAMINE MELODY</h2>
-          <p className="text-lg uppercase tracking-[0.3em] font-medium text-ink/60">รับชมวิดีโออธิบายเรื่อง Dopamine Melody</p>
+          <h2 className="font-sans font-bold text-5xl md:text-7xl mb-4 tracking-tight text-white drop-shadow-sm">{t.video.title}</h2>
+          <p className="text-lg uppercase tracking-[0.3em] font-medium text-ink/60">{t.video.subtitle}</p>
         </div>
 
         <motion.div 
@@ -380,6 +400,7 @@ const VideoSection = () => {
 };
 
 const PostModal = ({ post, onClose }: { post: any, onClose: () => void }) => {
+  const { t } = useLanguage();
   if (!post) return null;
 
   return (
@@ -411,7 +432,7 @@ const PostModal = ({ post, onClose }: { post: any, onClose: () => void }) => {
               referrerPolicy="no-referrer"
             />
             <div className="absolute top-6 left-6 bg-dopamine-yellow px-4 py-1 rounded-md text-xs font-bold uppercase tracking-widest text-ink">
-              สาระน่ารู้
+              {t.update.category}
             </div>
           </div>
           
@@ -447,7 +468,7 @@ const PostModal = ({ post, onClose }: { post: any, onClose: () => void }) => {
                 </div>
                 <div>
                   <div className="text-sm font-bold">{post.author}</div>
-                  <div className="text-[10px] uppercase tracking-widest opacity-50">ผู้สร้างคอนเทนต์</div>
+                  <div className="text-[10px] uppercase tracking-widest opacity-50">{t.update.authorRole}</div>
                 </div>
               </div>
               
@@ -455,7 +476,7 @@ const PostModal = ({ post, onClose }: { post: any, onClose: () => void }) => {
                 onClick={onClose}
                 className="text-sm font-bold uppercase tracking-widest border-b-2 border-dopamine-orange hover:text-dopamine-orange transition-colors"
               >
-                ปิดบทความ
+                {t.update.closeBtn}
               </button>
             </div>
           </div>
@@ -467,43 +488,26 @@ const PostModal = ({ post, onClose }: { post: any, onClose: () => void }) => {
 
 const UpdateSection = () => {
   const [selectedPost, setSelectedPost] = useState<any>(null);
-  const posts = [
-    {
-      id: 1,
-      title: "สมองกับการฟังเพลง",
-      excerpt: "การฟังเพลงที่คุณชอบช่วยกระตุ้นการหลั่งโดปามีนในสมองส่วนที่เกี่ยวข้องกับความพึงพอใจ",
-      author: "Admin",
-      date: "20 มี.ค. 2026",
-      image: "https://picsum.photos/seed/brain-music/800/600"
-    },
-    {
-      id: 2,
-      title: "โดปามีนและจังหวะดนตรี",
-      excerpt: "วิทยาศาสตร์เบื้องหลังว่าทำไมจังหวะดนตรีถึงช่วยเพิ่มสมาธิและอารมณ์ผ่านการเปลี่ยนแปลงทางเคมีในสมอง",
-      author: "Admin",
-      date: "18 มี.ค. 2026",
-      image: "https://picsum.photos/seed/rhythm/800/600"
-    },
-    {
-      id: 3,
-      title: "เสียงเพลงและระบบรางวัล",
-      excerpt: "สำรวจว่าแนวเพลงที่แตกต่างกันส่งผลต่อระดับโดปามีนและความเป็นอยู่ที่ดีทางอารมณ์อย่างไร",
-      author: "Admin",
-      date: "15 มี.ค. 2026",
-      image: "https://picsum.photos/seed/neuroscience/800/600"
-    }
-  ];
+  const { t } = useLanguage();
+  const posts = t.posts.map((p, i) => ({
+    ...p,
+    image: [
+      "https://picsum.photos/seed/brain-music/800/600",
+      "https://picsum.photos/seed/rhythm/800/600",
+      "https://picsum.photos/seed/neuroscience/800/600"
+    ][i]
+  }));
 
   return (
     <section id="update" className="py-24 px-6 bg-white">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-4">
           <div>
-            <h2 className="font-sans font-bold text-5xl md:text-7xl mb-4 tracking-tight">สาระน่ารู้เรื่องโดปามีน</h2>
-            <p className="text-lg opacity-60 uppercase tracking-widest">แบ่งปันความรู้และข้อมูลใหม่ๆ</p>
+            <h2 className="font-sans font-bold text-5xl md:text-7xl mb-4 tracking-tight">{t.update.title}</h2>
+            <p className="text-lg opacity-60 uppercase tracking-widest">{t.update.subtitle}</p>
           </div>
           <div className="flex items-center gap-2 text-dopamine-orange font-bold uppercase tracking-widest text-sm">
-            บทความทั้งหมด <ChevronRight size={16} />
+            {t.update.viewAll} <ChevronRight size={16} />
           </div>
         </div>
 
@@ -522,7 +526,7 @@ const UpdateSection = () => {
                   referrerPolicy="no-referrer"
                 />
                 <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-md text-[10px] font-bold uppercase tracking-widest">
-                  สาระน่ารู้
+                  {t.update.category}
                 </div>
               </div>
               <div className="flex items-center gap-4 text-xs font-bold uppercase tracking-widest opacity-40 mb-3">
@@ -535,7 +539,7 @@ const UpdateSection = () => {
                 onClick={() => setSelectedPost(post)}
                 className="flex items-center gap-2 text-sm font-bold uppercase tracking-widest group-hover:gap-4 transition-all"
               >
-                อ่านเพิ่มเติม <ChevronRight size={14} />
+                {t.update.readMore} <ChevronRight size={14} />
               </div>
             </motion.article>
           ))}
@@ -555,6 +559,7 @@ const UpdateSection = () => {
 };
 
 const JourneyModal = ({ isOpen, onClose }: { isOpen: boolean, onClose: () => void }) => {
+  const { t } = useLanguage();
   return (
     <AnimatePresence>
       {isOpen && (
@@ -578,30 +583,30 @@ const JourneyModal = ({ isOpen, onClose }: { isOpen: boolean, onClose: () => voi
             </button>
 
             <div className="max-w-3xl mx-auto">
-              <h2 className="font-sans font-bold text-5xl md:text-7xl mb-12 tracking-tight text-dopamine-yellow">กว่าจะมาเป็นเรา</h2>
+              <h2 className="font-sans font-bold text-5xl md:text-7xl mb-12 tracking-tight text-dopamine-yellow">{t.journey.title}</h2>
               
               <div className="space-y-12 text-lg text-ink/80 leading-relaxed">
                 <section className="relative pl-12 border-l-2 border-dopamine-orange/30">
                   <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-dopamine-orange" />
-                  <h3 className="text-2xl font-bold mb-4 text-ink">จุดเริ่มต้นของแรงบันดาลใจ</h3>
+                  <h3 className="text-2xl font-bold mb-4 text-ink">{t.journey.section1Title}</h3>
                   <p>
-                    โปรเจกต์นี้เริ่มต้นจากความสงสัยว่า "ทำไมดนตรีถึงทำให้เรามีความสุข?" เราจึงเริ่มศึกษาเรื่องระบบประสาทและสารโดปามีน จนพบว่ามันคือท่วงทำนองที่ซ่อนอยู่ในสมองของเราทุกคน
+                    {t.journey.section1Text}
                   </p>
                 </section>
 
                 <section className="relative pl-12 border-l-2 border-dopamine-orange/30">
                   <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-dopamine-orange" />
-                  <h3 className="text-2xl font-bold mb-4 text-ink">การออกแบบและการทดลอง</h3>
+                  <h3 className="text-2xl font-bold mb-4 text-ink">{t.journey.section2Title}</h3>
                   <p>
-                    เราใช้เวลาหลายเดือนในการทดลองสไตล์ภาพที่สามารถสื่อสารความรู้สึกของสารเคมีในสมองได้ จนออกมาเป็นสไตล์โมชั่นกราฟิกที่สดใสและเข้าใจง่ายอย่างที่เห็นในปัจจุบัน
+                    {t.journey.section2Text}
                   </p>
                 </section>
 
                 <section className="relative pl-12 border-l-2 border-dopamine-orange/30">
                   <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-dopamine-orange" />
-                  <h3 className="text-2xl font-bold mb-4 text-ink">เป้าหมายในอนาคต</h3>
+                  <h3 className="text-2xl font-bold mb-4 text-ink">{t.journey.section3Title}</h3>
                   <p>
-                    เรามุ่งหวังที่จะสร้างสรรค์คอนเทนต์ที่ให้ความรู้ควบคู่ไปกับความบันเทิง เพื่อให้ทุกคนเข้าใจตัวเองและสมองของตัวเองได้ดียิ่งขึ้นผ่านท่วงทำนองของโดปามีน
+                    {t.journey.section3Text}
                   </p>
                 </section>
               </div>
@@ -611,7 +616,7 @@ const JourneyModal = ({ isOpen, onClose }: { isOpen: boolean, onClose: () => voi
                   onClick={onClose}
                   className="bg-dopamine-orange text-white px-12 py-4 rounded-lg font-bold text-xl shadow-xl hover:bg-dopamine-yellow transition-colors"
                 >
-                  กลับสู่หน้าหลัก
+                  {t.journey.backBtn}
                 </button>
               </div>
             </div>
@@ -624,6 +629,7 @@ const JourneyModal = ({ isOpen, onClose }: { isOpen: boolean, onClose: () => voi
 
 const AboutSection = () => {
   const [isJourneyOpen, setIsJourneyOpen] = useState(false);
+  const { t } = useLanguage();
   return (
     <section id="about" className="py-24 px-6 bg-cream overflow-hidden relative">
       <JourneyModal isOpen={isJourneyOpen} onClose={() => setIsJourneyOpen(false)} />
@@ -633,24 +639,24 @@ const AboutSection = () => {
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
         >
-          <h2 className="font-sans font-bold text-5xl md:text-7xl mb-8 tracking-tight">เกี่ยวกับโปรเจกต์นี้</h2>
+          <h2 className="font-sans font-bold text-5xl md:text-7xl mb-8 tracking-tight">{t.about.title}</h2>
           <div className="space-y-6 text-lg text-ink/70 leading-relaxed">
             <p>
-              "The Dopamine Melody" เป็นโปรเจกต์โมชั่นกราฟิกเชิงทดลองที่ถ่ายทอดกระบวนการทางเคมีอันซับซ้อนของสมองผ่านมุมมองของดนตรีและจังหวะ
+              {t.about.p1}
             </p>
             <p>
-              ด้วยการผสมผสานสุนทรียศาสตร์ที่สดใสเข้ากับการเล่าเรื่องเชิงการศึกษา เรามุ่งหวังที่จะทำให้ประสาทวิทยาศาสตร์เป็นเรื่องที่เข้าถึงได้และน่าสนใจสำหรับทุกคน โดปามีนไม่ใช่แค่เรื่องของความพึงพอใจ แต่เป็นท่วงทำนองของการรอคอย แรงจูงใจ และรางวัล
+              {t.about.p2}
             </p>
           </div>
           
           <div className="mt-12 grid grid-cols-2 gap-8">
             <div className="border-l-4 border-dopamine-yellow pl-6">
               <div className="text-4xl title-prompt mb-1">98%</div>
-              <div className="text-sm uppercase tracking-widest font-bold opacity-50">อัตราการมีส่วนร่วม</div>
+              <div className="text-sm uppercase tracking-widest font-bold opacity-50">{t.about.stat1}</div>
             </div>
             <div className="border-l-4 border-dopamine-orange pl-6">
               <div className="text-4xl title-prompt mb-1">15k+</div>
-              <div className="text-sm uppercase tracking-widest font-bold opacity-50">ผู้เรียนที่เข้าถึง</div>
+              <div className="text-sm uppercase tracking-widest font-bold opacity-50">{t.about.stat2}</div>
             </div>
           </div>
 
@@ -661,7 +667,7 @@ const AboutSection = () => {
               onClick={() => setIsJourneyOpen(true)}
               className="bg-ink text-white px-8 py-4 rounded-lg font-bold text-lg shadow-xl flex items-center gap-3 group transition-all hover:bg-dopamine-orange"
             >
-              กว่าจะมาเป็นเรา
+              {t.about.journeyBtn}
               <ChevronRight className="group-hover:translate-x-1 transition-transform" />
             </motion.button>
           </div>
@@ -688,14 +694,54 @@ const AboutSection = () => {
 };
 
 const ContactFooter = () => {
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const { t } = useLanguage();
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitted(true);
+    // In a real app, you would send the data to a server here
+  };
+
   return (
     <footer id="contact" className="bg-ink text-white pt-24 pb-12 px-6">
+      <AnimatePresence>
+        {isSubmitted && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[200] bg-ink/80 backdrop-blur-sm flex items-center justify-center p-6"
+          >
+            <motion.div 
+              initial={{ scale: 0.9, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              className="bg-cream p-8 md:p-12 rounded-xl max-w-md w-full text-center shadow-2xl border-4 border-dopamine-yellow"
+            >
+              <div className="w-20 h-20 bg-dopamine-yellow rounded-full flex items-center justify-center mx-auto mb-6">
+                <Mail className="text-ink w-10 h-10" />
+              </div>
+              <h3 className="text-ink font-sans font-bold text-3xl mb-4">{t.contact.successTitle}</h3>
+              <p className="text-ink/70 text-lg mb-8">
+                {t.contact.successText}
+              </p>
+              <button 
+                onClick={() => setIsSubmitted(false)}
+                className="w-full bg-ink text-white font-bold py-4 rounded-lg hover:bg-dopamine-orange transition-colors"
+              >
+                {t.contact.okBtn}
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 mb-20">
           <div>
-            <h2 className="font-sans font-bold text-5xl md:text-7xl mb-8 text-dopamine-yellow tracking-tight">ติดต่อผู้สร้าง</h2>
+            <h2 className="font-sans font-bold text-5xl md:text-7xl mb-8 text-dopamine-yellow tracking-tight">{t.contact.title}</h2>
             <p className="text-white/60 text-lg mb-12 max-w-md">
-              มีคำถามเกี่ยวกับโปรเจกต์หรือต้องการร่วมงานกับเรา? ติดต่อเราได้ผ่านช่องทางเหล่านี้
+              {t.contact.subtitle}
             </p>
             
             <div className="space-y-6">
@@ -704,7 +750,7 @@ const ContactFooter = () => {
                   <Mail size={20} />
                 </div>
                 <div>
-                  <div className="text-xs uppercase tracking-widest opacity-50 font-bold">อีเมล</div>
+                  <div className="text-xs uppercase tracking-widest opacity-50 font-bold">{t.contact.email}</div>
                   <div className="text-lg">peekcnvs@gmail.com</div>
                 </div>
               </a>
@@ -713,7 +759,7 @@ const ContactFooter = () => {
                   <Facebook size={20} />
                 </div>
                 <div>
-                  <div className="text-xs uppercase tracking-widest opacity-50 font-bold">เฟซบุ๊ก</div>
+                  <div className="text-xs uppercase tracking-widest opacity-50 font-bold">{t.contact.facebook}</div>
                   <div className="text-lg">Dopamine Melody Official</div>
                 </div>
               </a>
@@ -721,23 +767,24 @@ const ContactFooter = () => {
           </div>
 
           <div className="bg-white/5 p-8 md:p-12 rounded-xl border border-white/10">
-            <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+            <form className="space-y-6" onSubmit={handleSubmit}>
+              <h3 className="text-2xl font-bold mb-6 text-dopamine-yellow">{t.contact.formTitle}</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
-                  <label className="text-xs uppercase tracking-widest font-bold opacity-50">ชื่อ</label>
-                  <input type="text" className="w-full bg-white/10 border-b border-white/20 py-3 px-4 focus:outline-none focus:border-dopamine-yellow transition-colors" placeholder="ชื่อของคุณ" />
+                  <label className="text-xs uppercase tracking-widest font-bold opacity-50">{t.contact.nameLabel}</label>
+                  <input required type="text" className="w-full bg-white/10 border-b border-white/20 py-3 px-4 focus:outline-none focus:border-dopamine-yellow transition-colors" placeholder={t.contact.namePlaceholder} />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-xs uppercase tracking-widest font-bold opacity-50">อีเมล</label>
-                  <input type="email" className="w-full bg-white/10 border-b border-white/20 py-3 px-4 focus:outline-none focus:border-dopamine-yellow transition-colors" placeholder="your@email.com" />
+                  <label className="text-xs uppercase tracking-widest font-bold opacity-50">{t.contact.emailLabel}</label>
+                  <input required type="email" className="w-full bg-white/10 border-b border-white/20 py-3 px-4 focus:outline-none focus:border-dopamine-yellow transition-colors" placeholder={t.contact.emailPlaceholder} />
                 </div>
               </div>
               <div className="space-y-2">
-                <label className="text-xs uppercase tracking-widest font-bold opacity-50">ข้อความ</label>
-                <textarea rows={4} className="w-full bg-white/10 border-b border-white/20 py-3 px-4 focus:outline-none focus:border-dopamine-yellow transition-colors resize-none" placeholder="เราจะช่วยคุณได้อย่างไร?"></textarea>
+                <label className="text-xs uppercase tracking-widest font-bold opacity-50">{t.contact.messageLabel}</label>
+                <textarea required rows={4} className="w-full bg-white/10 border-b border-white/20 py-3 px-4 focus:outline-none focus:border-dopamine-yellow transition-colors resize-none" placeholder={t.contact.messagePlaceholder}></textarea>
               </div>
-              <button className="w-full bg-dopamine-yellow text-ink font-bold py-4 rounded-md hover:bg-white transition-colors flex items-center justify-center gap-2">
-                ส่งข้อความ <MessageSquare size={18} />
+              <button type="submit" className="w-full bg-dopamine-yellow text-ink font-bold py-4 rounded-md hover:bg-white transition-colors flex items-center justify-center gap-2">
+                {t.contact.sendBtn} <MessageSquare size={18} />
               </button>
             </form>
           </div>
@@ -750,7 +797,7 @@ const ContactFooter = () => {
           </div>
           
           <div className="text-center">
-            <p className="title-prompt text-2xl md:text-4xl italic opacity-80">ขอบคุณที่รับชม</p>
+            <p className="title-prompt text-2xl md:text-4xl italic opacity-80">{t.contact.thanks}</p>
           </div>
 
           <div className="text-xs uppercase tracking-[0.2em] opacity-30">
