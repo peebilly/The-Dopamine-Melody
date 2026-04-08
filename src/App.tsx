@@ -30,12 +30,12 @@ class ErrorBoundary extends Component<{ children: ReactNode }, { hasError: boole
           <p className="text-lg text-ink/70 mb-8 max-w-md font-sans">
             แอปพลิเคชันพบข้อผิดพลาดที่ไม่คาดคิด โปรดลองรีเฟรชหน้าเว็บอีกครั้ง
           </p>
-          <div className="bg-white p-4 rounded-lg border border-ink/10 text-left overflow-auto max-w-2xl w-full">
+          <div className="bg-white p-4 rounded-md border border-ink/10 text-left overflow-auto max-w-2xl w-full">
             <code className="text-xs text-red-600">{this.state.error?.toString()}</code>
           </div>
           <button 
             onClick={() => window.location.reload()}
-            className="mt-8 bg-dopamine-yellow text-white px-8 py-3 rounded-full font-bold shadow-lg font-sans"
+            className="mt-8 bg-dopamine-yellow text-white px-8 py-3 rounded-lg font-bold shadow-lg font-sans"
           >
             รีเฟรชหน้าเว็บ
           </button>
@@ -326,12 +326,12 @@ const Hero = ({ onWatchClick }: { onWatchClick: () => void }) => {
           </p>
 
           <div className="flex justify-center md:justify-start">
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={onWatchClick}
-              className="bg-dopamine-orange text-white px-10 py-4 rounded-full font-bold text-lg shadow-xl shadow-dopamine-orange/20 flex items-center gap-3 group transition-all hover:bg-dopamine-yellow"
-            >
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={onWatchClick}
+                className="bg-dopamine-orange text-white px-10 py-4 rounded-lg font-bold text-lg shadow-xl shadow-dopamine-orange/20 flex items-center gap-3 group transition-all hover:bg-dopamine-yellow"
+              >
               <Play className="fill-current" />
               รับชมวิดีโอ!
             </motion.button>
@@ -361,7 +361,7 @@ const VideoSection = () => {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="w-full max-w-5xl mx-auto aspect-video bg-ink rounded-3xl overflow-hidden shadow-2xl relative group"
+          className="w-full max-w-5xl mx-auto aspect-video bg-ink rounded-xl overflow-hidden shadow-2xl relative group"
         >
           {/* YouTube Video Player */}
           <iframe 
@@ -375,7 +375,7 @@ const VideoSection = () => {
           
           {/* Overlay text if needed */}
           <div className="absolute inset-0 pointer-events-none flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-            <div className="bg-white/10 backdrop-blur-md px-8 py-4 rounded-full border border-white/20">
+            <div className="bg-white/10 backdrop-blur-md px-8 py-4 rounded-lg border border-white/20">
               <p className="text-white font-medium tracking-widest">วิดีโออธิบายเรื่อง DOPAMINE MELODY</p>
             </div>
           </div>
@@ -399,12 +399,12 @@ const PostModal = ({ post, onClose }: { post: any, onClose: () => void }) => {
         initial={{ scale: 0.9, opacity: 0, y: 20 }}
         animate={{ scale: 1, opacity: 1, y: 0 }}
         exit={{ scale: 0.9, opacity: 0, y: 20 }}
-        className="bg-cream w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-3xl relative shadow-2xl"
+        className="bg-cream w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-xl relative shadow-2xl"
       >
-        <button 
-          onClick={onClose}
-          className="absolute top-6 right-6 text-ink hover:text-dopamine-orange transition-colors z-10 bg-white/50 backdrop-blur-md p-2 rounded-full"
-        >
+          <button 
+            onClick={onClose}
+            className="absolute top-6 right-6 text-ink hover:text-dopamine-orange transition-colors z-10 bg-white/50 backdrop-blur-md p-2 rounded-md"
+          >
           <X size={24} />
         </button>
 
@@ -416,7 +416,7 @@ const PostModal = ({ post, onClose }: { post: any, onClose: () => void }) => {
               className="w-full h-full object-cover"
               referrerPolicy="no-referrer"
             />
-            <div className="absolute top-6 left-6 bg-dopamine-yellow px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest text-ink">
+            <div className="absolute top-6 left-6 bg-dopamine-yellow px-4 py-1 rounded-md text-xs font-bold uppercase tracking-widest text-ink">
               สาระน่ารู้
             </div>
           </div>
@@ -448,7 +448,7 @@ const PostModal = ({ post, onClose }: { post: any, onClose: () => void }) => {
 
             <div className="mt-12 pt-8 border-t border-ink/10 flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-dopamine-yellow flex items-center justify-center font-bold text-ink">
+                <div className="w-10 h-10 rounded-md bg-dopamine-yellow flex items-center justify-center font-bold text-ink">
                   A
                 </div>
                 <div>
@@ -520,14 +520,14 @@ const UpdateSection = () => {
               whileHover={{ y: -10 }}
               className="group cursor-pointer"
             >
-              <div className="aspect-[4/3] rounded-2xl overflow-hidden mb-6 relative">
+              <div className="aspect-[4/3] rounded-lg overflow-hidden mb-6 relative">
                 <img 
                   src={post.image} 
                   alt={post.title} 
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   referrerPolicy="no-referrer"
                 />
-                <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest">
+                <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-md text-[10px] font-bold uppercase tracking-widest">
                   สาระน่ารู้
                 </div>
               </div>
@@ -574,11 +574,11 @@ const JourneyModal = ({ isOpen, onClose }: { isOpen: boolean, onClose: () => voi
             initial={{ scale: 0.9, opacity: 0, y: 50 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.9, opacity: 0, y: 50 }}
-            className="bg-cream w-full max-w-5xl h-full max-h-[90vh] overflow-y-auto rounded-3xl relative shadow-2xl p-8 md:p-16"
+            className="bg-cream w-full max-w-5xl h-full max-h-[90vh] overflow-y-auto rounded-xl relative shadow-2xl p-8 md:p-16"
           >
             <button 
               onClick={onClose}
-              className="absolute top-8 right-8 text-ink hover:text-dopamine-orange transition-colors z-10 bg-white/50 backdrop-blur-md p-3 rounded-full"
+              className="absolute top-8 right-8 text-ink hover:text-dopamine-orange transition-colors z-10 bg-white/50 backdrop-blur-md p-3 rounded-md"
             >
               <X size={28} />
             </button>
@@ -615,7 +615,7 @@ const JourneyModal = ({ isOpen, onClose }: { isOpen: boolean, onClose: () => voi
               <div className="mt-16 text-center">
                 <button 
                   onClick={onClose}
-                  className="bg-dopamine-orange text-white px-12 py-4 rounded-full font-bold text-xl shadow-xl hover:bg-dopamine-yellow transition-colors"
+                  className="bg-dopamine-orange text-white px-12 py-4 rounded-lg font-bold text-xl shadow-xl hover:bg-dopamine-yellow transition-colors"
                 >
                   กลับสู่หน้าหลัก
                 </button>
@@ -665,7 +665,7 @@ const AboutSection = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => setIsJourneyOpen(true)}
-              className="bg-ink text-white px-8 py-4 rounded-full font-bold text-lg shadow-xl flex items-center gap-3 group transition-all hover:bg-dopamine-orange"
+              className="bg-ink text-white px-8 py-4 rounded-lg font-bold text-lg shadow-xl flex items-center gap-3 group transition-all hover:bg-dopamine-orange"
             >
               กว่าจะมาเป็นเรา
               <ChevronRight className="group-hover:translate-x-1 transition-transform" />
@@ -679,7 +679,7 @@ const AboutSection = () => {
           viewport={{ once: true }}
           className="relative"
         >
-          <div className="relative z-10 rounded-3xl overflow-hidden shadow-2xl rotate-3 border-8 border-white">
+          <div className="relative z-10 rounded-xl overflow-hidden shadow-2xl rotate-3 border-8 border-white">
             <img 
               src="https://images.unsplash.com/photo-1559757175-5700dde675bc?auto=format&fit=crop&q=80&w=1000" 
               alt="Brain Visualization" 
@@ -706,7 +706,7 @@ const ContactFooter = () => {
             
             <div className="space-y-6">
               <a href="mailto:peekcnvs@gmail.com" className="flex items-center gap-4 group">
-                <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-dopamine-orange transition-colors">
+                <div className="w-12 h-12 rounded-md bg-white/10 flex items-center justify-center group-hover:bg-dopamine-orange transition-colors">
                   <Mail size={20} />
                 </div>
                 <div>
@@ -715,7 +715,7 @@ const ContactFooter = () => {
                 </div>
               </a>
               <a href="#" className="flex items-center gap-4 group">
-                <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-dopamine-orange transition-colors">
+                <div className="w-12 h-12 rounded-md bg-white/10 flex items-center justify-center group-hover:bg-dopamine-orange transition-colors">
                   <Facebook size={20} />
                 </div>
                 <div>
@@ -726,7 +726,7 @@ const ContactFooter = () => {
             </div>
           </div>
 
-          <div className="bg-white/5 p-8 md:p-12 rounded-3xl border border-white/10">
+          <div className="bg-white/5 p-8 md:p-12 rounded-xl border border-white/10">
             <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
@@ -742,7 +742,7 @@ const ContactFooter = () => {
                 <label className="text-xs uppercase tracking-widest font-bold opacity-50">ข้อความ</label>
                 <textarea rows={4} className="w-full bg-white/10 border-b border-white/20 py-3 px-4 focus:outline-none focus:border-dopamine-yellow transition-colors resize-none" placeholder="เราจะช่วยคุณได้อย่างไร?"></textarea>
               </div>
-              <button className="w-full bg-dopamine-yellow text-ink font-bold py-4 rounded-xl hover:bg-white transition-colors flex items-center justify-center gap-2">
+              <button className="w-full bg-dopamine-yellow text-ink font-bold py-4 rounded-md hover:bg-white transition-colors flex items-center justify-center gap-2">
                 ส่งข้อความ <MessageSquare size={18} />
               </button>
             </form>
