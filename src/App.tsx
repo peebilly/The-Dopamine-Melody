@@ -386,7 +386,7 @@ const VideoSection = () => {
           {/* YouTube Video Player */}
           <iframe 
             className="w-full h-full"
-            src="https://www.youtube.com/embed/jANCqyec64U?si=RE9qFyAo820gIncB"
+            src="https://www.youtube.com/embed/8maxL3HETwk?si=5xalvhYkollBGxVF"
             title="YouTube video player"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
